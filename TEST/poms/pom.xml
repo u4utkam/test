@@ -15,6 +15,7 @@
     <module>jobs/process/VIJ/vij_read_json_0.1</module>
     <module>jobs/process/VIJ/vij_read_order_xml_0.1</module>
     <module>jobs/process/VIJ/vij_tmap_usage_0.1</module>
+    <module>jobs/process/VIJ/vij_tmap_usage_2_0.1</module>
   </modules>
   <properties>
     <signer.version>7.2.1</signer.version>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="HR" jobType="Standard" xmi:version="2.0">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendXMLMap="http://www.talend.org/xmlmap" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="HR" jobType="Standard" xmi:version="2.0">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="Ip or hostname" name="DB_host" prompt="DB_host?" promptNeeded="false" repositoryContextId="_1SH8oAe5Eeqmn5Y_gcA5Vg" type="id_String" value=""/>
     <contextParameter comment="login Password" name="DB_Password" prompt="DB_Password?" promptNeeded="false" repositoryContextId="_1SH8oAe5Eeqmn5Y_gcA5Vg" type="id_String" value=""/>
@@ -182,45 +182,43 @@
       <column comment="" key="false" length="-1" name="e_department_id" nullable="true" originalDbColumnName="department_id" originalLength="-1" pattern="" precision="-1" sourceType="NUMBER" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="160">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_2"/>
+  <node componentName="tXMLMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tXMLMap_1"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_fb6TwAe4Eeqmn5Y_gcA5Vg-tMap_2-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
-    <elementParameter field="TEXT" name="JACCARD" show="false" value="0"/>
-    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" show="false" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="true"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="false"/>
+    <elementParameter field="CHECK" name="KEEP_ORDER_FOR_DOCUMENT" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="Employee_with_Dept_name">
-      <column comment="" key="false" length="-1" name="Name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="Email" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="Job_ID" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="Department_Name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
+    <metadata connector="FLOW" label="out1" name="out1">
+      <column comment="" key="false" length="-1" name="Department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="Conentent" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Document" usefulColumn="true"/>
     </metadata>
-    <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" name="Employee_with_Dept_name" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row1.e_name " name="Name" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.e_mail " name="Email" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row1.e_job_id " name="Job_ID" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="row2.d_department_name " name="Department_Name" nullable="true" type="id_String"/>
-      </outputTables>
-      <inputTables activateExpressionFilter="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row1" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="e_name" nullable="true" type="id_String"/>
-        <mapperTableEntries name="e_mail" nullable="true" type="id_String"/>
-        <mapperTableEntries name="e_job_id" nullable="true" type="id_String"/>
-        <mapperTableEntries name="e_department_id" nullable="true" type="id_String"/>
-      </inputTables>
-      <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="row1.e_department_id " name="d_department_id" nullable="true" operator="=" type="id_String"/>
-        <mapperTableEntries name="d_department_name" nullable="true" type="id_String"/>
-      </inputTables>
+    <nodeData xsi:type="TalendXMLMap:XmlMapData">
+      <inputTrees lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="row1">
+        <nodes name="e_name" outgoingConnections="//@node.1/@nodeData/@connections.3" type="id_String" xpath="row1/e_name"/>
+        <nodes name="e_mail" outgoingConnections="//@node.1/@nodeData/@connections.4" type="id_String" xpath="row1/e_mail"/>
+        <nodes name="e_job_id" outgoingConnections="//@node.1/@nodeData/@connections.2" type="id_String" xpath="row1/e_job_id"/>
+        <nodes lookupOutgoingConnections="//@node.1/@nodeData/@connections.0" name="e_department_id" type="id_String" xpath="row1/e_department_id"/>
+      </inputTrees>
+      <inputTrees activateCondensedTool="true" lookup="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="row2">
+        <nodes expression="  row1.e_department_id" key="true" lookupIncomingConnections="//@node.1/@nodeData/@connections.0" name="d_department_id" type="id_String" xpath="row2/d_department_id"/>
+        <nodes name="d_department_name" outgoingConnections="//@node.1/@nodeData/@connections.1" type="id_String" xpath="row2/d_department_name"/>
+      </inputTrees>
+      <outputTrees activateCondensedTool="true" activateExpressionFilter="true" name="out1">
+        <nodes expression=" row2.d_department_name" incomingConnections="//@node.1/@nodeData/@connections.1" name="Department" pattern="" type="id_String" xpath="out1/Department"/>
+        <nodes expression="" name="Conentent" pattern="" type="id_Document" xpath="out1/Conentent">
+          <children expression="" loop="true" main="true" name="root" type="id_String" xpath="out1.Conentent:/root" xsi:type="TalendXMLMap:OutputTreeNode">
+            <children expression="row1.e_job_id" incomingConnections="//@node.1/@nodeData/@connections.2" name="Job_ID" type="id_String" xpath="out1.Conentent:/root/Job_ID" xsi:type="TalendXMLMap:OutputTreeNode"/>
+            <children expression="row1.e_name" incomingConnections="//@node.1/@nodeData/@connections.3" name="Name" type="id_String" xpath="out1.Conentent:/root/Name" xsi:type="TalendXMLMap:OutputTreeNode"/>
+            <children expression="row1.e_mail" incomingConnections="//@node.1/@nodeData/@connections.4" name="Email" type="id_String" xpath="out1.Conentent:/root/Email" xsi:type="TalendXMLMap:OutputTreeNode"/>
+          </children>
+        </nodes>
+      </outputTrees>
+      <varTables minimized="true" name="Var"/>
+      <connections source="//@node.1/@nodeData/@inputTrees.0/@nodes.3" target="//@node.1/@nodeData/@inputTrees.1/@nodes.0" xsi:type="TalendXMLMap:LookupConnection"/>
+      <connections source="//@node.1/@nodeData/@inputTrees.1/@nodes.1" target="//@node.1/@nodeData/@outputTrees.0/@nodes.0" xsi:type="TalendXMLMap:Connection"/>
+      <connections source="//@node.1/@nodeData/@inputTrees.0/@nodes.2" target="//@node.1/@nodeData/@outputTrees.0/@nodes.1/@children.0/@children.0" xsi:type="TalendXMLMap:Connection"/>
+      <connections source="//@node.1/@nodeData/@inputTrees.0/@nodes.0" target="//@node.1/@nodeData/@outputTrees.0/@nodes.1/@children.0/@children.1" xsi:type="TalendXMLMap:Connection"/>
+      <connections source="//@node.1/@nodeData/@inputTrees.0/@nodes.1" target="//@node.1/@nodeData/@outputTrees.0/@nodes.1/@children.0/@children.2" xsi:type="TalendXMLMap:Connection"/>
     </nodeData>
   </node>
   <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="224" posY="224">
@@ -272,95 +270,52 @@
       <column comment="" key="false" length="-1" name="d_department_name" nullable="true" originalDbColumnName="department_name" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tFileOutputExcel" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="544" posY="160">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileOutputExcel_1"/>
-    <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
-    <elementParameter field="CHECK" name="VERSION_2007" value="true"/>
-    <elementParameter field="CHECK" name="USESTREAM" value="false"/>
-    <elementParameter field="TEXT" name="STREAMNAME" show="false" value="outputStream"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;C:/Talend/Localhost_RMT/Employees_with_Departments.xlsx&quot;"/>
-    <elementParameter field="TEXT" name="SHEETNAME" value="&quot;Sheet1&quot;"/>
-    <elementParameter field="CHECK" name="INCLUDEHEADER" value="true"/>
-    <elementParameter field="CHECK" name="APPEND_FILE" value="false"/>
-    <elementParameter field="CHECK" name="APPEND_SHEET" show="false" value="false"/>
-    <elementParameter field="CHECK" name="FIRST_CELL_Y_ABSOLUTE" value="false"/>
-    <elementParameter field="TEXT" name="FIRST_CELL_X" show="false" value="0"/>
-    <elementParameter field="TEXT" name="FIRST_CELL_Y" show="false" value="0"/>
-    <elementParameter field="CHECK" name="KEEP_CELL_FORMATING" show="false" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="FONT" value="TIMES"/>
-    <elementParameter field="CHECK" name="IS_ALL_AUTO_SZIE" value="false"/>
-    <elementParameter field="TABLE" name="AUTO_SZIE_SETTING">
-      <elementValue elementRef="SCHEMA_COLUMN" value="Name"/>
-      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="Email"/>
-      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="Job_ID"/>
-      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="Department_Name"/>
-      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
-    </elementParameter>
+  <node componentName="tFileOutputXML" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="512" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tFileOutputXML_1"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;C:/Talend/Localhost_RMT/out.xml&quot;"/>
+    <elementParameter field="CHECK" name="INPUT_IS_DOCUMENT" value="true"/>
+    <elementParameter field="COLUMN_LIST" name="DOCUMENT_COL" value="Department"/>
+    <elementParameter field="TEXT" name="ROW_TAG" show="false" value="&quot;row&quot;"/>
+    <elementParameter field="CHECK" name="SPLIT" show="false" value="false"/>
+    <elementParameter field="TEXT" name="SPLIT_EVERY" show="false" value="1000"/>
     <elementParameter field="CHECK" name="CREATE" value="true"/>
-    <elementParameter field="CHECK" name="FLUSHONROW" value="false"/>
-    <elementParameter field="TEXT" name="FLUSHONROW_NUM" show="false" value="100"/>
-    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter field="TABLE" name="ROOT_TAGS" show="false"/>
+    <elementParameter field="TABLE" name="MAPPING" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="Department"/>
+      <elementValue elementRef="AS_ATTRIBUTE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN_NAME" value="true"/>
+      <elementValue elementRef="LABEL" value="&quot;label&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Conentent"/>
+      <elementValue elementRef="AS_ATTRIBUTE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN_NAME" value="true"/>
+      <elementValue elementRef="LABEL" value="&quot;label&quot;"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_GROUPING" show="false" value="false"/>
+    <elementParameter field="TABLE" name="GROUP_BY" show="false"/>
+    <elementParameter field="CHECK" name="FLUSHONROW" show="false" value="false"/>
+    <elementParameter field="TEXT" name="FLUSHONROW_NUM" show="false" value="1"/>
+    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" show="false" value="false"/>
     <elementParameter field="TEXT" name="THOUSANDS_SEPARATOR" show="false" value="&quot;,&quot;"/>
     <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" show="false" value="&quot;.&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="DELETE_EMPTYFILE" value="false"/>
-    <elementParameter field="CHECK" name="RECALCULATE_FORMULA" show="false" value="false"/>
-    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" show="false" value="100"/>
-    <elementParameter field="TEXT" name="LABEL" value="Employee_with_Dept"/>
+    <elementParameter field="CHECK" name="TRIM" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tFileOutputExcel_1">
-      <column comment="" key="false" length="-1" name="Name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="Email" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="Job_ID" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="Department_Name" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
+    <metadata connector="FLOW" label="out1" name="tFileOutputXML_1">
+      <column comment="" key="false" length="-1" name="Department" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="Conentent" nullable="true" originalLength="-1" pattern="" precision="-1" sourceType="" type="id_Document" usefulColumn="true"/>
     </metadata>
   </node>
-  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_2">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="e_name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="e_department_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="e_job_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="e_mail"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tXMLMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row1"/>
   </connection>
-  <connection connectorName="FLOW" label="Employee_with_Dept_name" lineStyle="0" metaname="Employee_with_Dept_name" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tFileOutputExcel_1">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="Email"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Job_ID"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
+  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tXMLMap_1" target="tFileOutputXML_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="Employee_with_Dept_name"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="out1"/>
   </connection>
-  <connection connectorName="FLOW" label="row2" lineStyle="8" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="24" source="tDBInput_2" target="tMap_2">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
-      <elementValue elementRef="TRACE_COLUMN" value="d_department_name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="d_department_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
+  <connection connectorName="FLOW" label="row2" lineStyle="8" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tXMLMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="row2"/>
   </connection>
@@ -369,13 +324,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_104b3671-3202-4f40-a39a-2202720e426b"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Kzq49lx/L9fIVBZ2x66IVjJJEEE31SyvirqRWMy00SJtJEXJH1ErvKxjZaeZbVkqZWqVe1JHBp8H
-XN9T6cMXug==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_a2ec0bb0-1fb4-443c-8851-429a8b7d5205"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>LgoHysK46h4uBnAFZcxhS1ToCR3RzbiJVC952LbZgeUcuWw5ZozvcBHDT2BktRuTQ1Y97TDRYbrU
-mmEPLyIPvw==</DigestValue></Reference></SignedInfo><SignatureValue>MSwVVTWngTkVuOxTmJl4jo+5AOxXr1RWTuKbnIgu0xuXdm5BN6HlV2/hF8gQFK4ynokXIJZEEevj
-yWg4KSa0oQnbOwAtGoavrHxZsN4+1hhJR7CU8/SD3GiNzMnVsPu4JM0q/q87KcwRLMTiSB4mAe1o
-HmQEsxA/AIOgr9M5Sj4LYLymBKqwbpyi5HNSVuni+XMMzcdXLV7z1WdPznv6BU3DyrxLfpiA6xlU
-ijxFXUcQidyvZ6gOgdWgwJkJCJ0EppL8xN0vn7ANSGm4L3bUhbWC5OvHw7EnpphCKlhD2OBtgX0G
-gE6efYvT07lLi7f5m9i9UlhPLwUCJTtSHDLVrw==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_1fd7b281-dc19-4dcb-a482-19015916edb5"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>ewQpcUN5Azl3QWkNAPoSo4vDhkXkqPomM6+SweOyqeRoN43JcQZYtMm/+gvhp8/tEzSYok3hhE09
+XhverSm6fg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_1b2efad6-3bdb-446a-b327-f51c01e35be6"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>VYEJ6H7S/zaqxDoovQ/uYxGwNlosrk8ErKfFIvhr5UD5zEEBf2xpyi2muuwUnRZPIYOdIK4Wbe40
+QxIa+aeg9g==</DigestValue></Reference></SignedInfo><SignatureValue>ORZptovOLO3HM2ZklafUEsEiVGeeJfkM4le7h0/SswzVdNvgGFZaWO9ZTM/1oHvggQEKkUzOtqA5
+keiulMQDgzkswsIHhRcmeFFdGucwgaeF0iehann8bn6dKUsvXPImO57n1VAq6ZzZ7GJdQ+MUb3I8
+7qT/IQ1Y7hzTk6uiKtIIVEeCqmgeEBOSfAfuZjuMX1Yc9UPH7B+bbgLDthGoQ2YSNEimSnIPvbM6
+MUM46qrnoHx3chjpo5eSN1FmhafEn8Du+UM2UsWiviY0GyzGVQk9XORCPZf5A+0JqDHbPk6T+/aw
+N93JVXhfpNbpsP1H5ZHgzSc8d64s3BQKFjXVIg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>C=FR,ST=Paris,L=Paris,O=Talend Inc.,OU=R&amp;D,CN=Talend Code Signing certificate</X509SubjectName><X509Certificate>MIIFADCCAuigAwIBAgIIA2OsD6bRyj0wDQYJKoZIhvcNAQELBQAwgY0xCzAJBgNVBAYTAkZSMQ4w
 DAYDVQQIEwVQYXJpczEOMAwGA1UEBxMFUGFyaXMxFDASBgNVBAoTC1RhbGVuZCBJbmMuMQwwCgYD
 VQQLDANSJkQxFjAUBgNVBAMMDVRhbGVuZCBSJkQgQ0ExIjAgBgkqhkiG9w0BCQEWE3NlY3VyaXR5
 QHRhbGVuZC5jb20wHhcNMTkwNjAzMDgxODIwWhcNMjkwNjAzMDAwMDAwWjB7MSgwJgYDVQQDEx9U
@@ -397,4 +352,4 @@ hakvpzhOyLo91h8YAQrEZJdNuKA8IYmBrFZQZDCz0uywKSyFfzPyJhvxylCLG/iDPPfE0VWcrMJ/
 WQJly/2XPg/NBCTF3pSKS0kCiA7PeaI3cWkMYYA3PMwYDvzqs1opBRglG7ikj0bQxSm3lcjMuuvW
 gBRksFKjP3K/nztsjSoYITOM9jR29ReIL3v0E8RbAFwA2RGq6Dxd0ixfbucMesy5Gnr8tfYy6rW+
 qSQqd3ah4+PSzBNVwIB4ytpdrG3SlhCI2i2Th8ek8Sjsaquh9qPAerWNd2+84HWOOGj1Xe1qc6vg
-qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_a2ec0bb0-1fb4-443c-8851-429a8b7d5205" Target="#_104b3671-3202-4f40-a39a-2202720e426b"><Timestamp>2019-11-15 19:34:47</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+qqu6JoK9EXKDiwBqDVkueIa+MhamE1VDnhn2pPui</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_1b2efad6-3bdb-446a-b327-f51c01e35be6" Target="#_1fd7b281-dc19-4dcb-a482-19015916edb5"><Timestamp>2019-11-15 20:08:45</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>

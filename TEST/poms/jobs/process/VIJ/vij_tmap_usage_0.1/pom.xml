@@ -6,7 +6,7 @@
     <groupId>org.example.test</groupId>
     <artifactId>code.Master</artifactId>
     <version>7.2.1</version>
-    <relativePath>../../../</relativePath>
+    <relativePath>../../../../</relativePath>
   </parent>
   <groupId>org.example.test.job</groupId>
   <artifactId>VIJ_tmap_usage</artifactId>
@@ -345,8 +345,8 @@
       <properties>
         <talend.pigudf.excludes.set>org.talend.pigudf.${talend.project.name.lowercase}:*</talend.pigudf.excludes.set>
         <talend.libraries.excludes.set>${talend.libraries.includes.set}</talend.libraries.excludes.set>
-        <talend.jobs.excludes.set>${project.groupId}:*</talend.jobs.excludes.set>
         <talend.code.excludes.set>org.talend.code.${talend.project.name.lowercase}:*</talend.code.excludes.set>
+        <talend.jobs.excludes.set>${project.groupId}:*</talend.jobs.excludes.set>
         <talend.libraries.includes.set>org.talend.libraries:*</talend.libraries.includes.set>
         <current.job.binaries.include>${project.groupId}:${project.artifactId}:${project.version}</current.job.binaries.include>
       </properties>
